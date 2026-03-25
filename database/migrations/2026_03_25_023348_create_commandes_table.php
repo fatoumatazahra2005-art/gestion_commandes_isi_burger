@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->enum('statut', [
+                'en_attente',
+                'en_preparation',
+                'prete',
+                'payee'
+            ])->default('en_attente');
+
+            $table->decimal('total', 10, 2)->default(0);
             $table->timestamps();
         });
     }

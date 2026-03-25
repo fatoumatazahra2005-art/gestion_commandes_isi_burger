@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('burgers', function (Blueprint $table) {
             $table->id();
+            $table->string('productName');
+            $table->decimal('price');
+            $table->string('image')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('stock')->default(0);
+
+
+            $table->foreignId('categorie_id')
+                ->constrained('categories')
+                ->cascadeOnDelete();
+
+
             $table->timestamps();
         });
     }

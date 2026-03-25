@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('paiements', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('commande_id')
+                ->unique()
+                ->constrained('commandes')
+                ->cascadeOnDelete();
+
+            $table->decimal('montant', 10, 2);
+            $table->timestamp('date_paiement')->nullable();
             $table->timestamps();
         });
     }

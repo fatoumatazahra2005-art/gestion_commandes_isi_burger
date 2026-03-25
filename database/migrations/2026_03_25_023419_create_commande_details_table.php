@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('commande_details', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('commande_id')
+                ->constrained('commandes')
+                ->cascadeOnDelete();
+
+            $table->foreignId('burger_id')
+                ->constrained('burgers')
+                ->cascadeOnDelete();
+
+            $table->integer('quantite');
+            $table->decimal('prix_unitaire', 10, 2);
+
             $table->timestamps();
         });
     }
